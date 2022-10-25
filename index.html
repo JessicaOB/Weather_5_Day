@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,16 +9,28 @@
     <link rel="stylesheet" href="./assets/style.css">
     <title>Weather Search 5 Day</title>
 </head>
+
 <body>
     <header>
         <h1>Weather Dashboard</h1>
-
     </header>
     <main>
-
+        <div class="row">
+            <div class="col-auto">
+                <input class="form-control" aria-describedby="searchHelp" id="userCity">
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" id="search">Search</button>
+            <div class="col-auto">
+                <span id="searchHelpInline" class="form-text">
+                    Enter a city name to search current and 5 day weather conditions.
+                </span>
+            </div>
+        </div>
+        <div></div>
+        <div></div>
     </main>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-  <script src="./assets/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./assets/script.js"></script>
 </body>
+
 </html>
