@@ -5,29 +5,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="./assets/style.css">
     <title>Weather Search 5 Day</title>
 </head>
 
 <body>
-    <header>
+    <header class="container-fluid text-center text-white bg-secondary p-3">
         <h1>Weather Dashboard</h1>
     </header>
     <main>
-        <div class="row">
-            <div class="col-auto">
-                <input class="form-control" aria-describedby="searchHelp" id="userCity">
-            </div>
-            <button type="button" class="btn btn-secondary btn-sm" id="search">Search</button>
-            <div class="col-auto">
-                <span id="searchHelpInline" class="form-text">
-                    Enter a city name to search current and 5 day weather conditions.
-                </span>
-            </div>
+        <div class="container-fluid">
+                <form class="col-3">
+                    <input class="form-control m-1" aria-describedby="searchHelp" id="userCity">
+                    <button type="button" class="btn btn-info btn-sm m-1" id="search">Search</button>
+                    <span id="searchHelpInline" class="row form-text m-1">
+                        Enter a city name to search current and 5 day weather conditions.
+                    </span>
+                </form>
+                <section class="col-6">
+                    <div class="card">
+                        <div class="card-body" id="current"></div>
+                    </div>
+                </section>
         </div>
-        <div></div>
-        <div></div>
+        <div class="container-fluid">
+            <section class="col-3" id="saved"></section>
+            <section class="col-6">
+                <div id="five-header"></div>
+                <div class="row" id="future"></div>
+            </section>
+        </div>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="./assets/script.js"></script>
