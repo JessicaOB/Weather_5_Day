@@ -9,10 +9,15 @@ function getWeather(event) {
     var requestURL = "https://api.openweathermap.org/data/2.5/weather?q=" + (userCity.val()) + "&units=imperial&appid=73f18ebb6396304904fb3525f689c405"
     fetch(requestURL)
         .then(function (response) {
+            if (response.status !== 200) {
+                alert("City not found!")
+                return
+            } else {
+                localStorage.setItem("savedCities", (userCity.val()))
+                console.log(localStorage.getItem("savedCities"))
+            }
             return response.json();
         })
-        .catch(function(response){
-            alert("Not a valid City");}
         .then(function (data) {
             console.log(data)
 
@@ -58,8 +63,8 @@ function getForecast() {
         .then(function (data) {
             console.log(data)
             var header = $("<h3>");
-                header.text("5 Day Forecast");
-                futureEl.append(header);
+            header.text("5 Day Forecast");
+            futureEl.append(header);
 
             for (var i = 0; i < data.list.length; i = i + 8) {
 
