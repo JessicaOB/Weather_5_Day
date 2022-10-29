@@ -16,24 +16,22 @@
     </header>
     <main>
         <div class="container-fluid row">
-                <form class="col-2">
-                    <input class="form-control m-2" aria-describedby="searchHelp" id="userCity">
-                    <button type="button" class="btn btn-info btn-sm m-2" id="search">Search</button>
-                    <span id="searchHelpInline" class="row form-text m-2">
-                        Enter a city name to search current and 5 day weather conditions.
-                    </span>
-                </form>
-                <section class="col-10">
-                    <div class="card m-2">
-                        <div class="card-body" id="current"></div>
-                    </div>
+            <form class="col-2">
+                <input class="form-control m-2" aria-describedby="searchHelp" id="userCity">
+                <button type="button" class="btn btn-info btn-sm m-2" id="search">Search</button>
+                <span id="searchHelpInline" class="row form-text m-2">
+                    Enter a city name to search current and 5 day weather conditions.
+                </span>
+                <section class="col-2 m-2" id="saved"></section>
+            </form>
+            <section class="col-10">
+                    <div id="current"></div>
+                <section class="m-2">
+                    <div class="row" id="future"></div>
                 </section>
+            </section>
         </div>
         <div class="container-fluid row">
-            <section class="col-2 m-2" id="saved"></section>
-            <section class="col-10 m-2">
-                <div class="row" id="future"></div>
-            </section>
         </div>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

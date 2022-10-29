@@ -3,24 +3,28 @@ var searchButton = $("#search");
 var currentEl = $("#current");
 var futureEl = $("#future");
 var savedEl = $("#saved");
+var savedCities = JSON.parse(localStorage.getItem("savedCities")) || []
 
-function getWeather(event) {
-    console.log(userCity.val());
-    var requestURL = "https://api.openweathermap.org/data/2.5/weather?q=" + (userCity.val()) + "&units=imperial&appid=73f18ebb6396304904fb3525f689c405"
+function getWeather(city) {
+    var requestURL = "https://api.openweathermap.org/data/2.5/weather?q=" + (city) + "&units=imperial&appid=73f18ebb6396304904fb3525f689c405"
     fetch(requestURL)
         .then(function (response) {
             if (response.status !== 200) {
                 alert("City not found!")
                 return
-            } else {
-                localStorage.setItem("savedCities", (userCity.val()))
-                console.log(localStorage.getItem("savedCities"))
             }
             return response.json();
         })
         .then(function (data) {
             console.log(data)
 
+            if (savedCities.includes(data.name) === false) {
+                savedCities.unshift(data.name)
+                localStorage.setItem("savedCities", JSON.stringify(savedCities))
+                console.log(localStorage.getItem("savedCities"))
+            }
+
+            currentEl.attr("class", "card-body m-2 border border-warning rounded p-3");
             var cityName = data.name;
             var cityNameEl = $('<h3>');
             cityNameEl.text(cityName);
@@ -52,10 +56,10 @@ function getWeather(event) {
             windEL.text("Wind Speed: " + windSpeed + "  MPH")
             currentEl.append(windEL);
         });
-    getForecast();
+    getForecast(city);
 };
-function getForecast() {
-    var requestURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + (userCity.val()) + "&units=imperial&appid=73f18ebb6396304904fb3525f689c405"
+function getForecast(city) {
+    var requestURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + (city) + "&units=imperial&appid=73f18ebb6396304904fb3525f689c405"
     fetch(requestURL)
         .then(function (response) {
             return response.json();
@@ -69,7 +73,7 @@ function getForecast() {
             for (var i = 0; i < data.list.length; i = i + 8) {
 
                 var forecastCard = $("<div>");
-                forecastCard.attr("class", "card col-2 m-1 bg-secondary text-white");
+                forecastCard.attr("class", "card col-2 m-1 bg-info text-white");
                 futureEl.append(forecastCard);
 
                 var forecastDate = data.list[i].dt;
@@ -99,6 +103,20 @@ function getForecast() {
                 forecastCard.append(forecastWindEl)
             }
         });
-
+    pastSearch();
 };
-searchButton.on("click", getWeather);
+function pastSearch() {
+    for (var i = 0; i < savedCities.length; i++) {
+        var searchEL = $('<button>');
+        searchEL.text(savedCities[i]);
+        searchEL.attr("class", "btn btn-warning btn-sm m-2 city");
+        savedEl.append(searchEL);
+    }
+};
+searchButton.on("click", function (event) {
+    getWeather(userCity.val())
+});
+// searchButton.on("click", function (event) {
+//     console.log()
+//     getWeather(event.target.innerText)
+// });
