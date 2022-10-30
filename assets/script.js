@@ -38,7 +38,7 @@ function getWeather(city) {
 
             var icon = data.weather[0].icon;
             var iconEl = $('<img>');
-            iconEl.attr("src", "http://openweathermap.org/img/wn/" + icon + "@2x.png");
+            iconEl.attr("src", "https://openweathermap.org/img/wn/" + icon + "@2x.png");
             currentEl.append(iconEl);
 
             var temp = data.main.temp;
@@ -112,10 +112,17 @@ function pastSearch() {
         searchEL.attr("class", "btn btn-warning btn-sm m-2 city");
         savedEl.append(searchEL);
     }
+    $(document).on("click", ".city", function() {
+        var pastCity = $(this).text();
+        getWeather(pastCity);
+    });
 };
 searchButton.on("click", function (event) {
     getWeather(userCity.val())
 });
+// $(".city").on("click", function (event) {
+//     console.log(event.target.innerText)
+// });
 // searchButton.on("click", function (event) {
 //     console.log()
 //     getWeather(event.target.innerText)
