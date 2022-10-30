@@ -103,27 +103,18 @@ function getForecast(city) {
                 forecastCard.append(forecastWindEl)
             }
         });
-    pastSearch();
 };
-function pastSearch() {
-    for (var i = 0; i < savedCities.length; i++) {
-        var searchEL = $('<button>');
-        searchEL.text(savedCities[i]);
-        searchEL.attr("class", "btn btn-warning btn-sm m-2 city");
-        savedEl.append(searchEL);
-    }
-    $(document).on("click", ".city", function() {
-        var pastCity = $(this).text();
-        getWeather(pastCity);
-    });
+for (var i = 0; i < savedCities.length; i++) {
+    var searchEL = $('<button>');
+    searchEL.text(savedCities[i]);
+    searchEL.attr("class", "btn btn-warning btn-sm m-2 city");
+    savedEl.append(searchEL);
 };
+$(document).on("click", ".city", function(event) {
+    event.preventDefault();
+    var cityButton = $(this).text();
+    getWeather(cityButton);
+});
 searchButton.on("click", function (event) {
     getWeather(userCity.val())
 });
-// $(".city").on("click", function (event) {
-//     console.log(event.target.innerText)
-// });
-// searchButton.on("click", function (event) {
-//     console.log()
-//     getWeather(event.target.innerText)
-// });
