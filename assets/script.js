@@ -4,7 +4,7 @@ var currentEl = $("#current");
 var futureEl = $("#future");
 var savedEl = $("#saved");
 var savedCities = JSON.parse(localStorage.getItem("savedCities")) || []
-
+//sends request to open weather api, displays current weather results
 function getWeather(city) {
     var requestURL = "https://api.openweathermap.org/data/2.5/weather?q=" + (city) + "&units=imperial&appid=73f18ebb6396304904fb3525f689c405"
     fetch(requestURL)
@@ -67,6 +67,7 @@ function getWeather(city) {
     };
     getForecast(city);
 };
+//send request to open weather api, diplays results for 5 day forecast
 function getForecast(city) {
     var requestURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + (city) + "&units=imperial&appid=73f18ebb6396304904fb3525f689c405"
     fetch(requestURL)
@@ -112,24 +113,29 @@ function getForecast(city) {
                 forecastCard.append(forecastWindEl)
             }
         });
-}; for (var i = 0; i < savedCities.length; i++) {
+}; 
+//gets saved cities from local storage and displays button for each city
+for (var i = 0; i < savedCities.length; i++) {
     savedEl.empty();
     var searchEL = $('<button>');
     searchEL.text(savedCities[i]);
     searchEL.attr("class", "btn btn-warning btn-sm m-2 city");
     savedEl.append(searchEL);
 };
+//event listener, starts function to get weather data and diplay results when a saved city button is clicked
 $(document).on("click", ".city", function (event) {
     event.preventDefault();
     var cityButton = $(this).text();
     getWeather(cityButton);
 });
+//event listener, clicks search button if enter is pressed while typing in the search input box
 userCity.on("keypress", function (event) {
     if (event.key === "Enter") {
         event.preventDefault();
         searchButton.click();
     }
 })
+//event listener, starts function to get weather data and display results when search button is clicked
 searchButton.on("click", function (event) {
     getWeather(userCity.val())
 });
