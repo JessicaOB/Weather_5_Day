@@ -23,6 +23,8 @@ function getWeather(city) {
                 localStorage.setItem("savedCities", JSON.stringify(savedCities))
                 console.log(localStorage.getItem("savedCities"))
             }
+            
+            currentEl.empty();
 
             currentEl.attr("class", "card-body m-2 border border-warning rounded p-3");
             var cityName = data.name;
@@ -65,7 +67,7 @@ function getForecast(city) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data)
+            futureEl.empty();
             var header = $("<h3>");
             header.text("5 Day Forecast");
             futureEl.append(header);
