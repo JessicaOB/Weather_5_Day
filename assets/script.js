@@ -113,10 +113,10 @@ function getForecast(city) {
                 forecastCard.append(forecastWindEl)
             }
         });
-}; 
+};
 //gets saved cities from local storage and displays button for each city
+savedEl.empty();
 for (var i = 0; i < savedCities.length; i++) {
-    savedEl.empty();
     var searchEL = $('<button>');
     searchEL.text(savedCities[i]);
     searchEL.attr("class", "btn btn-warning btn-sm m-2 city");
