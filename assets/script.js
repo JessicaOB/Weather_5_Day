@@ -23,7 +23,7 @@ function getWeather(city) {
                 localStorage.setItem("savedCities", JSON.stringify(savedCities))
                 console.log(localStorage.getItem("savedCities"))
             }
-            
+
             currentEl.empty();
 
             currentEl.attr("class", "card-body m-2 border border-warning rounded p-3");
@@ -58,6 +58,13 @@ function getWeather(city) {
             windEL.text("Wind Speed: " + windSpeed + "  MPH")
             currentEl.append(windEL);
         });
+    savedEl.empty();
+    for (var i = 0; i < savedCities.length; i++) {
+        var searchEL = $('<button>');
+        searchEL.text(savedCities[i]);
+        searchEL.attr("class", "btn btn-warning btn-sm m-2 city");
+        savedEl.append(searchEL);
+    };
     getForecast(city);
 };
 function getForecast(city) {
@@ -105,18 +112,24 @@ function getForecast(city) {
                 forecastCard.append(forecastWindEl)
             }
         });
-};
-for (var i = 0; i < savedCities.length; i++) {
+}; for (var i = 0; i < savedCities.length; i++) {
+    savedEl.empty();
     var searchEL = $('<button>');
     searchEL.text(savedCities[i]);
     searchEL.attr("class", "btn btn-warning btn-sm m-2 city");
     savedEl.append(searchEL);
 };
-$(document).on("click", ".city", function(event) {
+$(document).on("click", ".city", function (event) {
     event.preventDefault();
     var cityButton = $(this).text();
     getWeather(cityButton);
 });
+userCity.on("keypress", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        searchButton.click();
+    }
+})
 searchButton.on("click", function (event) {
     getWeather(userCity.val())
 });
