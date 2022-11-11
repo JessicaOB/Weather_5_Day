@@ -1,5 +1,5 @@
 # Weather Dashboard
-![GitHub] (https://img.shields.io/badge/license-MIT-blue?style=plastic)
+![GitHub](https://img.shields.io/badge/license-MIT-blue?style=plastic)
 
 ## Search Weather by City
 
